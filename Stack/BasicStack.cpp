@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 class Stack {
 private:
     int* array;
@@ -21,7 +21,7 @@ public:
     }
     void push(int value) {
         if (isFull()) {
-            std::cout << "Stack Overflow. Cannot push element onto a full stack.\n";
+            std::cout << "Overflow.\n";
             return;
         }
         array[++top] = value;
@@ -29,7 +29,7 @@ public:
     }
     void pop() {
         if (isEmpty()) {
-            std::cout << "Stack Underflow. Cannot pop element from an empty stack.\n";
+            std::cout << "Underflow.\n";
             return;
         }
         int poppedValue = array[top--];
