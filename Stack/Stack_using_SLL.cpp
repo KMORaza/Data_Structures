@@ -23,7 +23,7 @@ public:
     }
     void pop() {
         if (isEmpty()) {
-            std::cout << "Stack Underflow. Cannot pop element from an empty stack.\n";
+            std::cout << "Underflow!\n";
             return;
         }
         Node* temp = top;
