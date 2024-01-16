@@ -5,7 +5,7 @@ class Amortized_Analysis_of_Dynamic_Array {
 private:
     std::vector<T> dynamicArray;
 public:
-    AmortizedDynamicArray() {
+    Amortized_Analysis_of_Dynamic_Array() {
         dynamicArray.reserve(1);
     }
     void addElement(const T& element) {
