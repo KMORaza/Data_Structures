@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 template <typename T>
-class AmortizedDynamicArray {
+class Amortized_Analysis_of_Dynamic_Array {
 private:
     std::vector<T> dynamicArray;
 public:
@@ -24,7 +24,7 @@ public:
     }
 };
 int main() {
-    AmortizedDynamicArray<int> dynamicArray;
+    Amortized_Analysis_of_Dynamic_Array<int> dynamicArray;
     for (int i = 1; i <= 10; ++i) {
         dynamicArray.addElement(i);
         dynamicArray.displayElements();
