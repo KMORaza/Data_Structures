@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <limits>
+#include <queue>
+#include <unordered_set>
+const int INF = std::numeric_limits<int>::max();
+class Graph {
+public:
+    Graph() {}
+    void addVertex(int vertex) {
+        if (adjacencyList.find(vertex) == adjacencyList.end()) {
+            adjacencyList[vertex] = std::vector<std::pair<int, int>>();
+        }
+    }
+    void addEdge(int from, int to, int weight) {
+        adjacencyList[from].emplace_back(to, weight);
+        adjacencyList[to].emplace_back(from, weight); 
+    }
+    int prim() {
+        int totalWeight = 0;
+        std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> minHeap;
+        std::unordered_set<int> visited;
+        minHeap.push({0, 0});
+        while (!minHeap.empty()) {
+            int currentVertex = minHeap.top().second;
+            int currentWeight = minHeap.top().first;
+            minHeap.pop();
+            if (visited.find(currentVertex) != visited.end()) {
+                continue;
+            }
+            visited.insert(currentVertex);
+            totalWeight += currentWeight;
+            for (const auto& neighbor : adjacencyList[currentVertex]) {
+                int neighborVertex = neighbor.first;
+                int edgeWeight = neighbor.second;
+                if (visited.find(neighborVertex) == visited.end()) {
+                    minHeap.push({edgeWeight, neighborVertex});
+                }
+            }
+        }
+        return totalWeight;
+    }
+private:
+    std::unordered_map<int, std::vector<std::pair<int, int>>> adjacencyList;
+};
+int main() {
+    Graph myGraph;
+    int numVertices, numEdges;
+    std::cout << "Enter the number of vertices and edges: ";
+    std::cin >> numVertices >> numEdges;
+    for (int i = 0; i < numVertices; ++i) {
+        myGraph.addVertex(i);
+    }
+    std::cout << "Enter the edges (from to weight):" << std::endl;
+    for (int i = 0; i < numEdges; ++i) {
+        int from, to, weight;
+        std::cin >> from >> to >> weight;
+        myGraph.addEdge(from, to, weight);
+    }
+    int minimumSpanningTreeWeight = myGraph.prim();
+    std::cout << "Weight of the Minimum Spanning Tree: " << minimumSpanningTreeWeight << std::endl;
+    return 0;
+}
